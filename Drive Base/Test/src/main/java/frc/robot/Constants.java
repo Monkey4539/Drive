@@ -13,5 +13,5 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public final double MAX_SPEED = .75;
+    public final double MAX_SPEED = .5;
 }
