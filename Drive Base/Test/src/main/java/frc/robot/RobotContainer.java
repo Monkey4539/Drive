@@ -4,11 +4,14 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.MyArcadeDriveCommand;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Shifter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -19,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_Drivetrain = new Drivetrain();
+  private final DoubleSolenoid m_DoubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
 
   private final XboxController xboxController = new XboxController(0);
 
@@ -37,6 +41,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     MyArcadeDriveCommand cmd = new MyArcadeDriveCommand(m_Drivetrain, xboxController);
     m_Drivetrain.setDefaultCommand(cmd);
+
+    if (xboxController.getXButtonPressed()){
+      m_DoubleSolenoid.toggle();
+    }
   }
 
   /**
